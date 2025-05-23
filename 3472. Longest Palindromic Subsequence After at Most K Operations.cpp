@@ -22,9 +22,6 @@ Modification Case:
 
 If we want to change the character at index i to match the character at index j (or vice versa), we calculate the cyclic cost of doing so:
 
-pgsql
-Copy
-Edit
 cost = min(abs(s[i] - s[j]), 26 - abs(s[i] - s[j]))
 This is because characters wrap around in the alphabet.
 
