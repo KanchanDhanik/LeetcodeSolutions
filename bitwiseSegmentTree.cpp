@@ -72,7 +72,7 @@ int main(){
     }
     int st[4 * size];
 
-    int start_op = (n % 2 == 1) ? 1 : 0; // ✔️ OR if n is odd, XOR if even
+    int start_op = (n % 2 == 1) ? 1 : 0; // OR if n is odd, XOR if even
     build(st, nums, 0, 0, size - 1, start_op);
 
     while (m--) {
