@@ -9,7 +9,7 @@ We need to check whether the pattern p occurs in s, with one twist: the pattern 
 
 🧠 Approach:
 To solve this, I divide the pattern string p into two parts:
-
+ 
 The substring before the '*'
 
 The substring after the '*'
