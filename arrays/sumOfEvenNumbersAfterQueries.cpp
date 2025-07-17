@@ -5,8 +5,7 @@ store result after each query execution*/
 using namespace std;
 
 
-vector<int>findSumeven(vector<int>&nums,vector<vector<int>>&queries){
-    int n=nums.size();
+vector<int>findSumeven(vector<int>&nums,vector<vector<int>>&queries,int n){
     int sumEven=0;
     for(auto&num:nums){
         if(num%2==0){
@@ -44,7 +43,7 @@ int main(){
             cin>>queries[i][j];
         }
     }
-    vector<int>ans=findSumeven(nums,queries);
+    vector<int>ans=findSumeven(nums,queries,n);
     cout<<endl<<endl;
     for(int&num:ans){
         cout<<num<<" ";
