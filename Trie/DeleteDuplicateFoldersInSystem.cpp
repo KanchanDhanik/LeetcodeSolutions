@@ -51,26 +51,20 @@ void insert(Node*root,vector<string>&path){
 
 //populate function to add subfolder name and map assingment
 
-string populate(struct Node*root,unordered_map<string,int>&folderMap){
+string populate(struct Node*root,unordered_map<string,int>folderMap){
     vector<pair<string,string>>subFolderPath;
 
-    for(auto it = root->children.begin(); it != root->children.end(); ++it){
-    string childname = it->first;
-    Node* childNode = it->second;
-    string subfolderRes = populate(childNode, folderMap);
-    subFolderPath.push_back({childname, subfolderRes});
-}
-
+    for(auto &[childname,childNode]:root->children){
+        string subfolderRes=populate(childNode,folderMap);
+        subFolderPath.push_back({childname,subfolderRes});
+    }
     sort(subFolderPath.begin(),subFolderPath.end());
 
     string completepath="";
 
-    for(auto it = subFolderPath.begin(); it != subFolderPath.end(); ++it){
-    string childname = it->first;
-    string subfolderRes = it->second;
-    completepath += "(" + childname + subfolderRes + ")";
-}
-
+    for(auto&[childname,subfolderRes]:subFolderPath){
+        completepath+="("+childname+subfolderRes+")";
+    }
     root->subfolder=completepath;
     if(!completepath.empty()){
         folderMap[completepath]++;
@@ -94,14 +88,12 @@ void removeDuplicates(struct Node*root,unordered_map<string,int>&folderMap){
 }
 
 void construct(struct Node*root,vector<string>&path,vector<vector<string>>&res){
-    for(auto it = root->children.begin(); it != root->children.end(); ++it){
-    string childname = it->first;
-    Node* childnode = it->second;
-    path.push_back(childname);
-    res.push_back(path);
-    construct(childnode, path, res);
-    path.pop_back();
-}
+    for(auto&[childname,childnode]:root->children){
+        path.push_back(childname);
+        res.push_back(path);
+        construct(childnode,path,res);
+        path.pop_back();
+    }
 }
 
 
