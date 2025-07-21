@@ -1,10 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-bool bfs(int u,unordered_map<int,vector<int>>&adj,vector<bool>&vis,vector<bool>&inRec){
-    
-}
-   
 
 int main(){
     int V;
@@ -12,20 +8,38 @@ int main(){
     int E;
     cin>>E;
     unordered_map<int,vector<int>>adj;
+    vector<int>inDegree(V,0);
     for(int i=0;i<E;i++){
         int u,v;
         cin>>u>>v;
+        inDegree[v]++;
         adj[u].push_back(v);
     }
-    vector<bool>vis(V,false);
-    vector<bool>inRec(V,false);
-    bool cycle=false;
+    queue<int>q;
+    cout<<endl;
+    vector<int>res;
+    int cnt=0;
     for(int i=0;i<V;i++){
-        if(!vis[i] && bfs(i,adj,vis,inRec)){
-            cycle=true;
-            break;
+        if(inDegree[i]==0){
+            q.push(i);
+            cnt++;
         }
     }
-    cout<<(cycle?"cycle found":"No cycle Found")<<endl;
-    return 0;
+
+    while(!q.empty()){
+        int u=q.front();
+        q.pop();
+        res.push_back(u);
+        for(int&v:adj[u]){
+            inDegree[v]--;
+
+            if(inDegree[v]==0){
+                q.push(v);
+                cnt++;
+            }
+        }
+    }
+    if(cnt==V)cout<<"Not a cyclic graph";
+    else cout<<"Cyclic Graph";
+   
 }
