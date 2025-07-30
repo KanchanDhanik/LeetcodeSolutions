@@ -62,6 +62,7 @@
     "string": "cpp",
     "iostream": "cpp",
     "ostream": "cpp",
-    "regex": "cpp"
+    "regex": "cpp",
+    "new": "cpp"
   }
 }
